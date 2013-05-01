@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="content content-interview-respond">
+	<h1>Introduce Yourself</h1>
+
+	<p>Please provide some basic info.</p>
+
+	<form id="interview_respond_form" method="POST" action="">
+		{% csrf_token %}
+
+		<div class="user-form">
+			{{ user_form.as_p }}
+		</div>
+
+		<p>Share at least one of your online presences on Facebook, LinkedIn, Twitter, eBay, Airbnb, etc.</p>
+		<p>Copy and paste the links below.</p>
+
+		<div class="socialprofile-formset">
+			{{ socialprofile_formset.non_form_errors }}
+			{{ socialprofile_formset.as_p }}
+		</div>
+
+		<p>
+			Leave a short video.
+			<br/>
+			Introduce yourself and provide some context.
+			<br/>
+			Remember to answer any questions mentioned by {{ interviewer.get_full_name }}.
+		</p>
+
+		{{ video_form.as_p }}
+		<camera id="{{ camera_name }}" name="scout_video" data-uuid="{{ camera_uuid }}"></camera>
+
+		<input class="button" type="submit" value="SUBMIT"/>
+	</form>
+
+</div>
+
+<script type="text/javascript">
+var response_errors;
+$(document).ready(function(){
+	var max_socialprofile_inputs = $("input#id_respond-MAX_NUM_FORMS").val();
+	var $socialprofile_formset = $(".socialprofile-formset");
+
+	//Add more social profile inputs as needed.
+	$socialprofile_formset.on('focus', "input[type='text']", function(){
+		//Make sure focused input is empty
+		if($(this).val() != '') return false;
+
+		//Count empty social profile inputs and add one if the focused input is the last empty one
+		var empty_inputs = $(".socialprofile-formset input[type='text']").filter(function(){ 
+								return $(this).val() == "";
+							}).length;
+		if(empty_inputs <= 1){
+			var total_inputs = $(".socialprofile-formset input[type='text']").length
+
+			//Create and append new input
+			var $new_input = $(this).clone().val('')
+				.attr('id', 'id_respond-' + total_inputs + '-profile_url')
+				.attr('name', 'respond-' + total_inputs + '-profile_url');
+			$socialprofile_formset.append($("<p></p>").append($new_input));
+
+			//Increment formset total form input
+			$("input#id_respond-TOTAL_FORMS").val(total_inputs + 1);
+
+			//Turn off listener when we reach the max number of inputs
+			if((total_inputs + 1) >= max_socialprofile_inputs){
+				$socialprofile_formset.off('focus', "input[type='text']");
+			}
+		}
+	});
+
+
+	//Validate form on submit
+	var $interview_respond_form = $("form#interview_respond_form");
+	var get_errorlist = function(errorlist, elem){
+		$errorlist = $("<ul class='errorlist'></ul>");
+
+		$.each(errorlist, function(index, val){
+			$errorlist.append($("<li></li>").text(val));
+		});
+
+		elem.before($errorlist);
+		
+		return;
+	};
+
+	$interview_respond_form.submit(function(){
+		$.ajax({
+			type:"POST",
+			url:"/validate/interview_respond",
+			data:$interview_respond_form.serialize(),
+			beforeSend: function(xhr){
+				$("ul.errorlist").remove();
+			}
+		}).done(function(response){
+			response_errors = response;
+
+			if(response.status == 'success'){
+				$interview_respond_form.off().submit();
+				return true;
+			}
+
+			if(response.user_form.name){
+				get_errorlist(response.user_form.name, $("input#id_name").parent("p"));
+			}
+
+			if(response.user_form.email){
+				get_errorlist(response.user_form.email, $("input#id_email").parent("p"));
+			}
+
+			if(response.socialprofile_formset_nonform.length > 0){
+				get_errorlist(response.socialprofile_formset_nonform, $(".socialprofile-formset"));
+			}
+			else if(response.socialprofile_formset.length > 0){
+				$.each(response.socialprofile_formset, function(index, val){
+					if(val.profile_url){
+						get_errorlist(val.profile_url, $("input#id_respond-" + index + "-profile_url").parent("p"));
+					}
+				});
+			}
+
+			if(response.video_form.__all__){
+				get_errorlist(response.video_form.__all__, $(".camera_tag"));
+			}
+		});
+
+		return false;
+	})
+});
+</script>
+
+{% endblock %}

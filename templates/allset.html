@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="content content-allset">
+	<h1>You're all set!</h1>
+
+	<p>
+		Copy and paste the below URL to anyone you want to verify. Put it in your listing or an e-mail.
+		<br/>
+		We'll send you an e-mail when someone responds.
+	</p>
+
+	<div class="public_url">
+		<a href="/{{ interview.interviewer.username }}/">http://{{ host }}/{{ interview.interviewer.username }}/</a>
+	</div>
+
+	<div class="private_url">
+		<p>
+			Private URL:
+			<a href="/{{ interview.uuid }}/">http://{{ host }}/{{ interview.uuid }}/</a>
+		</p>
+	</div>
+
+
+</div>
+
+{% endblock %}

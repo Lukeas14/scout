@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="content content-interview-private">
+	<h1>{{ interview.interviewer.get_full_name }}</h1>
+
+	<video id="interview_video" class="video-js vjs-default-skin" controls
+  preload="auto" width="420" height="315" poster="http:{{ interviewer_video.thumb_url }}"
+  data-setup="{}">
+		<source src="http:{{ interviewer_video.video_url }}" type='video/mp4'>
+	</video>
+
+	<p>{{ interview.interviewer.email }}</p>
+
+	<h2>Responses ({{ responses|length }})</h2>
+	{% if responses|length == 0 %}
+		You haven't receieved any responses yet.
+	{% else %}
+		<table class="responses" cellspacing="0" cellpadding="8">
+			<thead>
+				<tr>
+					<th class="name">Name:</th>
+					<th class="email">Email:</th>
+					<th class="date">Response Date:</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for response in responses %}
+				<tr class="{% cycle 'odd' 'even'%}">
+					<td class="name"><a href="/response/{{ response.username }}/">{{ response.get_full_name }}</a></td>
+					<td class="email"><a href="/response/{{ response.username }}/">{{ response.email }}</a></td>
+					<td class="date"><a href="/response/{{ response.username }}/">{{ response.date_joined|date:"l, F j, Y"}}</a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	{% endif %}
+
+	<div class="interview-links">
+		<p>Public (share with others): <a href="/{{ interview.interviewer.username }}/">http://{{ host }}/{{ interview.interviewer.username }}/</a></p>
+		<p>Private (editable): <a href="/interview/{{ interview.uuid }}/">http://{{ host }}/{{ interview.uuid }}/</a></p>
+	</div>
+</div>
+
+{% endblock %}
