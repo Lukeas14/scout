@@ -1,4 +1,4 @@
-{{ interviewer.get_full_name}}
+{{ interviewer.get_full_name}},
 
 Congrats! You have a new response to your Scout interview from {{ user.get_full_name }}.
 
@@ -8,7 +8,6 @@ http://{{ host }}/response/{{ user.username }}
 {{ user.get_full_name }} also submitted the following {{ user.social_profiles.all|length }} social profiles:
 {% for profile in user.social_profiles.all %}
 	{{ profile.url }}
-	
 {% endfor %}
 
 View all your responses at your private interview URL:
