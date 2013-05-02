@@ -7,12 +7,14 @@ from django import forms
 from django.conf import settings
 from django.utils import simplejson
 from django.core.serializers.json import DjangoJSONEncoder
+from django.core.mail import send_mail
 from django.http import HttpResponse, Http404
 
 from .models import SocialProfile, Interview, Video
 from .forms import UserForm, RespondForm, SocialProfileForm, BaseSocialProfileFormset, VideoForm
 
 def home(request):
+	send_mail('Test Scout Email', 'Message!', 'ray@heyscout.com', ['lukeas14@gmail.com'], fail_silently=False)
 	if request.method == 'POST':
 		user_form = UserForm(request.POST)
 		user_form.fields['name'].widget = forms.TextInput(attrs={'placeholder': 'Your Name'})

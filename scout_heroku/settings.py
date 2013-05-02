@@ -168,6 +168,11 @@ SOCIAL_PROFILES_REQUIRED = 1
 
 DEFAULT_PASSWORD = os.environ.get('SCOUT_DEFAULT_PASSWORD');
 
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = os.environ.get('SCOUT_SENDGRID_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('SCOUT_SENDGRID_PASSWORD')
+EMAIL_HOST_PORT = 587
+EMAIL_USE_TLS = True
 
 #Environment specific settings
 if os.environ.get('SCOUT_ENV'):
