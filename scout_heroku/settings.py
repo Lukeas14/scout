@@ -1,7 +1,12 @@
 # Django settings for scout_heroku project.
+import os
+
+from unipath import Path
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+PROJECT_DIR = Path(__file__).ancestor(2)
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -69,6 +74,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    PROJECT_DIR.child("static"),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -108,6 +114,7 @@ ROOT_URLCONF = 'scout_heroku.urls'
 WSGI_APPLICATION = 'scout_heroku.wsgi.application'
 
 TEMPLATE_DIRS = (
+    PROJECT_DIR.child("templates"),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -157,19 +164,24 @@ LOGGING = {
     }
 }
 
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
+if os.environ.get('SCOUT_ENV'):
+    SCOUT_ENV = os.environ.get('SCOUT_ENV')
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    if SCOUT_ENV == 'local':
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+                'NAME': 'scout',                      # Or path to database file if using sqlite3.
+                # The following settings are not used with sqlite3:
+                'USER': 'scout',
+                'PASSWORD': 'scout',
+                'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+                'PORT': '',                      # Set to empty string for default.
+            }
+        }
+    elif SCOUT_ENV == 'production':
+        import dj_database_url
+        DATABASES['default'] = dj_database_url.config()
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'scout',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'scout',
-        'PASSWORD': 'scout',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
-    }
-}
+        SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
