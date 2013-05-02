@@ -9,6 +9,22 @@ from django.utils import simplejson
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse, Http404
 
-def home(request):
+from .models import SocialProfile, Interview, Video
+from .forms import UserForm, RespondForm, SocialProfileForm, BaseSocialProfileFormset, VideoForm
 
-	return render(request, 'home.html', {})
+def home(request):
+	if request.method == 'POST':
+		user_form = UserForm(request.POST)
+		user_form.fields['name'].widget = forms.TextInput(attrs={'placeholder': 'Your Name'})
+		user_form.fields['email'].widget = forms.TextInput(attrs={'placeholder': 'E-mail Address'})
+
+		if user_form.is_valid():
+			user_form.create_user()
+
+			return redirect("/createvid/" + user_form.user.get_username() + "/")
+	else:
+		user_form = UserForm()
+		user_form.fields['name'].widget = forms.TextInput(attrs={'placeholder': 'Your Name'})
+		user_form.fields['email'].widget = forms.TextInput(attrs={'placeholder': 'E-mail Address'})
+
+	return render(request, 'home.html', {'user_form': user_form})
