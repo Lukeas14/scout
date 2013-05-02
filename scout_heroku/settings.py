@@ -173,6 +173,7 @@ EMAIL_HOST_USER = os.environ.get('SCOUT_SENDGRID_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('SCOUT_SENDGRID_PASSWORD')
 EMAIL_HOST_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_WEBMASTER = 'ray@scout.com'
 
 #Environment specific settings
 if os.environ.get('SCOUT_ENV'):

@@ -9,19 +9,20 @@ from django.utils import simplejson
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.mail import send_mail
 from django.http import HttpResponse, Http404
+from django.template.loader import get_template
+from django.template import Context
 
 from .models import SocialProfile, Interview, Video
 from .forms import UserForm, RespondForm, SocialProfileForm, BaseSocialProfileFormset, VideoForm
 
 def home(request):
-	send_mail('Test Scout Email', 'Message!', 'ray@heyscout.com', ['lukeas14@gmail.com'], fail_silently=False)
 	if request.method == 'POST':
 		user_form = UserForm(request.POST)
 		user_form.fields['name'].widget = forms.TextInput(attrs={'placeholder': 'Your Name'})
 		user_form.fields['email'].widget = forms.TextInput(attrs={'placeholder': 'E-mail Address'})
 
 		if user_form.is_valid():
-			user_form.create_user()
+			user = user_form.create_user()
 
 			return redirect("/createvid/" + user_form.user.get_username() + "/")
 	else:
@@ -50,6 +51,14 @@ def createvid(request, username):
 				thumb_url = request.POST['scout_video[qvga][thumb]'],
 				small_thumb_url = request.POST['scout_video[qvga][small_thumb]'],
 				video_url = request.POST['scout_video[qvga][video]']
+			)
+
+			send_mail(
+				'Welcome to Scout',
+				get_template('emails/welcome.txt').render(Context({'user': user, 'interview': interview})),
+				settings.EMAIL_WEBMASTER,
+				[user.email],
+				fail_silently=True
 			)
 
 			return render(request, 'allset.html', {
