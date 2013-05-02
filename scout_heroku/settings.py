@@ -168,6 +168,7 @@ SOCIAL_PROFILES_REQUIRED = 1
 
 DEFAULT_PASSWORD = os.environ.get('SCOUT_DEFAULT_PASSWORD');
 
+
 #Environment specific settings
 if os.environ.get('SCOUT_ENV'):
 	SCOUT_ENV = os.environ.get('SCOUT_ENV')
