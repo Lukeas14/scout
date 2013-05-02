@@ -90,7 +90,6 @@ STATICFILES_FINDERS = (
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = os.environ.get('SCOUT_SECRET_KEY')
-SECRET_KEY = '2i32902j390j232903j902j3'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -194,6 +193,8 @@ if os.environ.get('SCOUT_ENV'):
 		SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 		DEBUG = False
+
+		ALLOWED_HOSTS = ['.herokuapp.com']
 
 		CAMERA_NAME = 'scout_prod'
 		CAMERA_UUID = 'fd133d70-8de4-0130-d4dd-12313b086d5f'
