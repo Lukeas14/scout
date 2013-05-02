@@ -1,12 +1,13 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+
+admin.autodiscover()
 
 urlpatterns = patterns('',
 	url(r'^$', 'interviews.views.home'),
+	url(r'^admin/', include(admin.site.urls)),
 	(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 	url(r'^createvid/(?P<username>[\w-]+)/$', 'interviews.views.createvid'),
 	url(r'^allset/(?P<interview_uuid>\w+)/$', 'interviews.views.allset'),
