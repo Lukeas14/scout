@@ -7,14 +7,11 @@ from django.conf import settings
 
 urlpatterns = patterns('',
 	url(r'^$', 'interviews.views.home'),
-    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-    # Examples:
-    # url(r'^$', 'scout_heroku.views.home', name='home'),
-    # url(r'^scout_heroku/', include('scout_heroku.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+	(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+	url(r'^createvid/(?P<username>[\w-]+)/$', 'connections.views.createvid'),
+	url(r'^allset/(?P<interview_uuid>\w+)/$', 'connections.views.allset'),
+	url(r'^(?P<identifier>[\w-]+)/$', 'connections.views.interview'),
+	url(r'^respond/(?P<username>[\w-]+)/$', 'connections.views.interview_respond'),
+	url(r'^response/(?P<username>[\w-]+)/$', 'connections.views.interview_response'),
+	url(r'^validate/interview_respond', 'connections.views.validate_interview_respond')
 )
