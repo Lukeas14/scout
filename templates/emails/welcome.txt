@@ -1,6 +1,6 @@
 Hi {{ user.get_full_name }},
 
-Thanks for signing up to HeyScout and recording the video for your first interview. 
+Thanks for signing up to Scout and recording the video for your first interview. 
 
 Copy and past the below URL to anyone you want to verify. Put it in your listing or an e-mail. We'll send you an e-mail when someone responds.
 http://{{ host }}/{{ interview.interviewer.username }}/

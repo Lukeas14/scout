@@ -55,8 +55,8 @@ def createvid(request, username):
 
 			send_mail(
 				'Welcome to Scout',
-				get_template('emails/welcome.txt').render(Context({'user': user, 'interview': interview})),
-				settings.EMAIL_WEBMASTER,
+				get_template('emails/welcome.txt').render(Context({'user': user, 'interview': interview, 'host': request.get_host()})),
+				"Scout <%s>" % (settings.EMAIL_WEBMASTER),
 				[user.email],
 				fail_silently=True
 			)
