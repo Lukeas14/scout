@@ -196,5 +196,5 @@ if os.environ.get('SCOUT_ENV'):
 
 		ALLOWED_HOSTS = ['.herokuapp.com']
 
-		CAMERA_NAME = 'scout_prod'
-		CAMERA_UUID = 'fd133d70-8de4-0130-d4dd-12313b086d5f'
+		CAMERA_NAME = 'scout_heroku'
+		CAMERA_UUID = '9ff500b0-9520-0130-d660-12313b086d5f'
