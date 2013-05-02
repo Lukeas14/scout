@@ -160,7 +160,7 @@ def interview_respond(request, username):
 			#Send email to interviewee
 			send_mail(
 				'Thanks for Your Response on Scout',
-				get_template('emails/welcome.txt').render(Context({'user': user, 'interviewer': interviewer, 'interview': interview, 'host': request.get_host()})),
+				get_template('emails/response_thank_you.txt').render(Context({'user': user, 'interviewer': interviewer, 'interview': interview, 'host': request.get_host()})),
 				"Scout <%s>" % (settings.EMAIL_WEBMASTER),
 				[user.email],
 				fail_silently=True
