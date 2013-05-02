@@ -48,12 +48,18 @@ class SocialProfile(models.Model):
 		else:
 			return self.OTHER
 
+	def __unicode__(self):
+		return self.user.get_full_name() + ' - ' + self.get_site_display()
+
 class Interview(models.Model):
 	interviewer = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='interviewers')
 	interviewee = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='interviewees')
 	uuid = models.CharField(unique=True, default=create_uuid, max_length=255)
 	time_added = models.DateTimeField(auto_now_add=True)
 	time_modified = models.DateTimeField(auto_now=True)
+
+	def __unicode__(self):
+		return self.interviewer.get_full_name() + ' interview'
 
 class Video(models.Model):
 	interview = models.ForeignKey(Interview)
@@ -65,3 +71,5 @@ class Video(models.Model):
 	time_added = models.DateTimeField(auto_now_add=True)
 	time_modified = models.DateTimeField(auto_now=True)
 
+	def __unicode__(self):
+		return self.user.get_full_name() + ' video'
