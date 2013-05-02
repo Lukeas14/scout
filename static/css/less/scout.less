@@ -1,0 +1,391 @@
+@color_blue:#4EABEA;
+@color_blue_light:#d7e6f1;
+@color_blue_dark:#258DD3;
+@color_green:#47BA42;
+@color_green_dark:#40A53B;
+
+/* Mixins */
+.border-radius(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+	-webkit-border-top-right-radius: @topright;
+	-webkit-border-bottom-right-radius: @bottomright;
+	-webkit-border-bottom-left-radius: @bottomleft;
+	-webkit-border-top-left-radius: @topleft;
+	-moz-border-radius-topright: @topright;
+	-moz-border-radius-bottomright: @bottomright;
+	-moz-border-radius-bottomleft: @bottomleft;
+	-moz-border-radius-topleft: @topleft;
+	border-top-right-radius: @topright;
+	border-bottom-right-radius: @bottomright;
+	border-bottom-left-radius: @bottomleft;
+	border-top-left-radius: @topleft;
+}
+
+/* Site-wide */
+html{
+	height:100%;
+}
+body{
+	min-width:800px;
+	height:100%;
+	margin:0;
+	padding:0;
+	background:#FFF;
+	font-family: 'Open Sans', sans-serif;
+	font-size:15px;
+}
+
+.container{
+	min-height:100%;
+	position:relative;
+}
+
+.site-header{
+	overflow:hidden;
+	width:100%;
+	height:70px;
+	background:@color_blue;
+
+	h1.logo{
+		margin-left:30px;
+		font-size:1.7em;
+		color:#FFF;
+		font-weight:400;
+	}
+}
+
+.content{
+	/*position:absolute;
+	top:70px;
+	bottom:0px;
+	left:0;
+	right:0;
+	min-height:100%;*/
+	margin:0 auto;
+	padding:0 0 60px 0;
+	overflow:auto;
+}
+
+.video-js{
+	margin:0 auto;
+}
+
+/* Common elements */
+h1{
+	font-size:2.5em;
+}
+
+form{
+
+	input{
+		display:block;
+		clear:both;
+		margin:15px auto 0;
+		font-size:1em;
+
+		&[type='text']{
+			width:245px;
+			padding:2px;
+		}
+	}
+
+	ul.errorlist{
+		list-style:none;
+		margin:0px;
+		padding:0px;
+
+		li{
+			color:#990000;
+		}
+	}
+}
+
+.button{
+	width:200px;
+	padding:20px 0;
+	border:none;
+	background:@color_green;
+	font-size:1.1em;
+	font-weight:700;
+	color:#FFF;
+	text-decoration:none;
+	cursor:pointer;
+	.border-radius(5px, 5px, 5px, 5px);
+}
+.button:hover{
+	background:@color_green_dark;
+}
+
+/* Homepage */
+.content-homepage{
+	position:absolute;
+	top:70px;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	padding:0;
+	z-index:0;
+	min-height:500px;
+	background:url('/static/img/bluepower.jpg') bottom center no-repeat;
+	background-size:cover;
+	
+	img.homepage-background{
+		position:absolute;
+		width:100%;
+		height:100%;
+	}
+
+	.home-box{
+		width:40%;
+		min-width:325px;
+		margin:120px auto 0 auto;
+		padding:20px;
+		background:#FFF;
+		border:1px solid @color_blue;
+		.border-radius(5px, 5px, 5px, 5px);
+
+		h1{
+			margin:20px 0;
+			font-size:2.4em;
+			font-weight:700;
+			text-align:center;
+		}
+
+		p.intro{
+			margin:0 0 25px 0;
+			text-align:center;
+			font-size:0.9em;
+		}
+
+		form.home-form{
+			margin:0px auto;
+			text-align:center;
+		}
+	}
+}
+
+/* Create Video */
+.content-createvid{
+	width:450px;
+	text-align:center;
+
+	p{
+		margin:25px;
+	}
+
+	ul.errorlist{
+		margin-bottom:5px;
+	}
+}
+
+/* All Set */
+.content-allset{
+	text-align:center;
+
+	.public_url{
+		margin-top:40px;
+
+		a{
+			font-size:2.0em;
+			font-weight:700;
+			color:@color_blue;
+			text-decoration:none;
+
+			&:hover{
+				color:@color_blue_dark;
+			}
+		}
+	}
+
+	.private_url{
+		position:absolute;
+		bottom:10px;
+		left:50%;
+		width:600px;
+		height:25px;
+		margin-left:-300px;
+		background:@color_blue;
+		.border-radius(3px, 3px, 3px, 3px);
+
+		p{
+			margin:4px 0;
+			font-size:0.85em;
+			color:#FFF;
+			font-weight:600;
+
+			a{
+				color:#FFF;
+				text-decoration:none;
+			}
+		}
+	}
+}
+
+/* Interview Public */
+.content-interview-public{
+	text-align:center;
+
+	h1{
+		margin:40px 0;
+		font-size:2.5em;
+	}
+
+	p.interested_text{
+		display:block;
+		margin:30px 0;
+		padding:0;
+	}
+
+	a.interested_button{
+		display:block;
+		margin:0 auto;
+	}
+}
+
+/* Interview Private */
+.content-interview-private{
+	text-align:center;
+
+	h2{
+		width:700px;
+		margin:10px auto;
+		text-align:left;
+	}
+
+	table.responses{
+		width:700px;
+		margin:0 auto 30px auto;
+
+		thead{
+			tr{
+				th{
+					padding:0 0 5px 0;
+					text-align:left;
+					color:#444;
+
+					&.date{
+						text-align:right;
+					}
+				}
+			}
+		}
+		tbody{
+			tr{
+
+				&.odd{
+					background:#EEE;
+				}
+				&:hover{
+					background:@color_blue_light;
+				}
+
+				td{
+					text-align:left;
+
+					&.date{
+						text-align:right;
+					}
+
+					a{
+						display:block;
+						width:100%;
+						height:100%;
+						padding:0px;
+						color:#555;
+						text-decoration:none;
+					}
+				}
+			}
+		}
+	}
+
+	.interview-links{
+		position:absolute;
+		bottom:10px;
+		left:50%;
+		width:600px;
+		height:50px;
+		margin-left:-300px;
+		background:@color_blue;
+		.border-radius(3px, 3px, 3px, 3px);
+
+		p{
+			margin:4px 0;
+			font-size:0.85em;
+			color:#FFF;
+			font-weight:600;
+
+			a{
+				color:#FFF;
+				text-decoration:none;
+			}
+		}
+	}
+}
+
+/* Interview Respond */
+.content-interview-respond{
+	text-align:center;
+
+	h1{
+		font-size:2.5em;
+	}
+
+	p{
+		display:block;
+		max-width:450px;
+		margin:25px auto;
+	}
+
+	.user-form{
+
+		ul.errorlist{
+			margin-top:15px;
+		}
+		p{
+			margin:auto;
+		}
+
+		label{
+			display:inline-block;
+			width:150px;
+			text-align:left;
+		}
+		input{
+			display:inline-block;
+		}
+
+	}
+
+	.camera_tag{
+		margin-top:10px;
+	}
+
+	.socialprofile-formset{
+		input{
+			width:400px;
+		}
+	}
+}
+
+/* Interview Response */
+.content-interview-response{
+	text-align:center;
+
+	.social_profiles{
+		a{
+			display:block;
+			margin:5px 0;
+			color:#222;
+			text-decoration:none;
+
+			&:hover{
+				color:@color_blue;
+			}
+		}
+	}
+}
+
+/* Thank You */
+.content-thankyou{
+	text-align:center;
+}

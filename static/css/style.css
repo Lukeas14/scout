@@ -1,0 +1,342 @@
+/* Mixins */
+/* Site-wide */
+html {
+  height: 100%;
+}
+body {
+  min-width: 800px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #FFF;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+}
+.container {
+  min-height: 100%;
+  position: relative;
+}
+.site-header {
+  overflow: hidden;
+  width: 100%;
+  height: 70px;
+  background: #4eabea;
+}
+.site-header h1.logo {
+  margin-left: 30px;
+  font-size: 1.7em;
+  color: #FFF;
+  font-weight: 400;
+}
+.content {
+  /*position:absolute;
+	top:70px;
+	bottom:0px;
+	left:0;
+	right:0;
+	min-height:100%;*/
+
+  margin: 0 auto;
+  padding: 0 0 60px 0;
+  overflow: auto;
+}
+.video-js {
+  margin: 0 auto;
+}
+/* Common elements */
+h1 {
+  font-size: 2.5em;
+}
+form input {
+  display: block;
+  clear: both;
+  margin: 15px auto 0;
+  font-size: 1em;
+}
+form input[type='text'] {
+  width: 245px;
+  padding: 2px;
+}
+form ul.errorlist {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+form ul.errorlist li {
+  color: #990000;
+}
+.button {
+  width: 200px;
+  padding: 20px 0;
+  border: none;
+  background: #47ba42;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #FFF;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-topleft: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.button:hover {
+  background: #40a53b;
+}
+/* Homepage */
+.content-homepage {
+  position: absolute;
+  top: 70px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 0;
+  z-index: 0;
+  min-height: 500px;
+  background: url('/static/img/bluepower.jpg') bottom center no-repeat;
+  background-size: cover;
+}
+.content-homepage img.homepage-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.content-homepage .home-box {
+  width: 40%;
+  min-width: 325px;
+  margin: 120px auto 0 auto;
+  padding: 20px;
+  background: #FFF;
+  border: 1px solid #4eabea;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-topleft: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.content-homepage .home-box h1 {
+  margin: 20px 0;
+  font-size: 2.4em;
+  font-weight: 700;
+  text-align: center;
+}
+.content-homepage .home-box p.intro {
+  margin: 0 0 25px 0;
+  text-align: center;
+  font-size: 0.9em;
+}
+.content-homepage .home-box form.home-form {
+  margin: 0px auto;
+  text-align: center;
+}
+/* Create Video */
+.content-createvid {
+  width: 450px;
+  text-align: center;
+}
+.content-createvid p {
+  margin: 25px;
+}
+.content-createvid ul.errorlist {
+  margin-bottom: 5px;
+}
+/* All Set */
+.content-allset {
+  text-align: center;
+}
+.content-allset .public_url {
+  margin-top: 40px;
+}
+.content-allset .public_url a {
+  font-size: 2.0em;
+  font-weight: 700;
+  color: #4eabea;
+  text-decoration: none;
+}
+.content-allset .public_url a:hover {
+  color: #258dd3;
+}
+.content-allset .private_url {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  width: 600px;
+  height: 25px;
+  margin-left: -300px;
+  background: #4eabea;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -webkit-border-top-left-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  -moz-border-radius-topleft: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.content-allset .private_url p {
+  margin: 4px 0;
+  font-size: 0.85em;
+  color: #FFF;
+  font-weight: 600;
+}
+.content-allset .private_url p a {
+  color: #FFF;
+  text-decoration: none;
+}
+/* Interview Public */
+.content-interview-public {
+  text-align: center;
+}
+.content-interview-public h1 {
+  margin: 40px 0;
+  font-size: 2.5em;
+}
+.content-interview-public p.interested_text {
+  display: block;
+  margin: 30px 0;
+  padding: 0;
+}
+.content-interview-public a.interested_button {
+  display: block;
+  margin: 0 auto;
+}
+/* Interview Private */
+.content-interview-private {
+  text-align: center;
+}
+.content-interview-private h2 {
+  width: 700px;
+  margin: 10px auto;
+  text-align: left;
+}
+.content-interview-private table.responses {
+  width: 700px;
+  margin: 0 auto 30px auto;
+}
+.content-interview-private table.responses thead tr th {
+  padding: 0 0 5px 0;
+  text-align: left;
+  color: #444;
+}
+.content-interview-private table.responses thead tr th.date {
+  text-align: right;
+}
+.content-interview-private table.responses tbody tr.odd {
+  background: #EEE;
+}
+.content-interview-private table.responses tbody tr:hover {
+  background: #d7e6f1;
+}
+.content-interview-private table.responses tbody tr td {
+  text-align: left;
+}
+.content-interview-private table.responses tbody tr td.date {
+  text-align: right;
+}
+.content-interview-private table.responses tbody tr td a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  color: #555;
+  text-decoration: none;
+}
+.content-interview-private .interview-links {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  width: 600px;
+  height: 50px;
+  margin-left: -300px;
+  background: #4eabea;
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -webkit-border-top-left-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  -moz-border-radius-topleft: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.content-interview-private .interview-links p {
+  margin: 4px 0;
+  font-size: 0.85em;
+  color: #FFF;
+  font-weight: 600;
+}
+.content-interview-private .interview-links p a {
+  color: #FFF;
+  text-decoration: none;
+}
+/* Interview Respond */
+.content-interview-respond {
+  text-align: center;
+}
+.content-interview-respond h1 {
+  font-size: 2.5em;
+}
+.content-interview-respond p {
+  display: block;
+  max-width: 450px;
+  margin: 25px auto;
+}
+.content-interview-respond .user-form ul.errorlist {
+  margin-top: 15px;
+}
+.content-interview-respond .user-form p {
+  margin: auto;
+}
+.content-interview-respond .user-form label {
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+}
+.content-interview-respond .user-form input {
+  display: inline-block;
+}
+.content-interview-respond .camera_tag {
+  margin-top: 10px;
+}
+.content-interview-respond .socialprofile-formset input {
+  width: 400px;
+}
+/* Interview Response */
+.content-interview-response {
+  text-align: center;
+}
+.content-interview-response .social_profiles a {
+  display: block;
+  margin: 5px 0;
+  color: #222;
+  text-decoration: none;
+}
+.content-interview-response .social_profiles a:hover {
+  color: #4eabea;
+}
+/* Thank You */
+.content-thankyou {
+  text-align: center;
+}
