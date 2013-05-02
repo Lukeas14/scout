@@ -148,6 +148,24 @@ def interview_respond(request, username):
 				video_url = request.POST['scout_video[qvga][video]']
 			)
 
+			#Send email to interviewer
+			send_mail(
+				'New Interview Response on Scout',
+				get_template('emails/new_response.txt').render(Context({'user': user, 'interviewer': interviewer, 'interview': interview, 'host': request.get_host()})),
+				"Scout <%s>" % (settings.EMAIL_WEBMASTER),
+				[interviewer.email],
+				fail_silently=True
+			)
+
+			#Send email to interviewee
+			send_mail(
+				'Thanks for Your Response on Scout',
+				get_template('emails/welcome.txt').render(Context({'user': user, 'interviewer': interviewer, 'interview': interview, 'host': request.get_host()})),
+				"Scout <%s>" % (settings.EMAIL_WEBMASTER),
+				[user.email],
+				fail_silently=True
+			)
+
 			return render(request, 'thankyou.html', {
 				'interviewer': interviewer,
 				'interview': interview

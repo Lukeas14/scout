@@ -1,0 +1,9 @@
+{{ user.get_full_name }},
+
+Thanks for responding to the interview. {{ interviewer.get_full_name }} will get back to you soon.
+
+In the meantime, you can create your own video interview on Scout right from our homepage:
+http://{{ host }}/
+
+Cheers,
+Ray

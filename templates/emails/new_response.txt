@@ -1,0 +1,12 @@
+{{ interviewer.get_full_name}}
+
+Congrats! You have a new response from your interview on Scout.
+
+View the video response by {{ user.get_full_name }} here:
+http://{{ host }}/response/{{ user.username }}
+
+View all your responses at your private interview URL:
+http://{{ host }}/{{ interview.uuid }}
+
+Cheers,
+Ray
