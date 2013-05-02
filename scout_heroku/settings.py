@@ -192,7 +192,7 @@ if os.environ.get('SCOUT_ENV'):
 
 		SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-		DEBUG = False
+		DEBUG = True
 
 		ALLOWED_HOSTS = ['.herokuapp.com']
 
