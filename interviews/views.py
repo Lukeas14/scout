@@ -77,12 +77,9 @@ def createvid(request, username):
 		'camera_uuid': settings.CAMERA_UUID
 	})
 
-def allset(request, interview_uuid):
-	interview = get_object_or_404(Interview, uuid=interview_uuid)
-	return render(request, 'allset.html', {'interview': interview, 'host': request.get_host()})
-
 def interview(request, identifier):
 	try:
+		#Public interview page
 		user = get_user_model().objects.get(username=identifier)
 		interview = Interview.objects.filter(interviewer=user)[:1][0]
 		interview_video = interview.video_set.get(user=user)
@@ -93,15 +90,34 @@ def interview(request, identifier):
 		return render(request, 'interview_public.html', {'user': user, 'interview': interview, 'interview_video': interview_video})
 
 	except get_user_model().DoesNotExist:
+		#Private interview page
 		try:
 			interview = Interview.objects.get(uuid=identifier)
 			interviewer_video = interview.video_set.get(user=interview.interviewer)
 			responses = interview.interviewee.order_by('-date_joined')
 
+			if request.method == "POST":
+				user_form = UserForm(request.POST)
+
+				if user_form.is_valid():
+					user = user_form.save_user(interview.interviewer)
+
+					return redirect("/" + interview.uuid + "/")
+
+			else:
+				user_form = UserForm(initial={
+					'name': interview.interviewer.get_full_name(),
+					'email': interview.interviewer.email
+				})
+
+			user_form.fields['name'].label = "Your Name"
+			user_form.fields['email'].label = "E-mail Address"
+			
 			return render(request, 'interview_private.html', {
 				'interview': interview,
 				'interviewer_video': interviewer_video,
 				'responses': responses,
+				'user_form': user_form,
 				'host': request.get_host()
 			})
 

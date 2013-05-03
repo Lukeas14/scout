@@ -12,7 +12,7 @@
 
 	<p>{{ interview.interviewer.email }}</p>
 
-	<h2>Responses ({{ responses|length }})</h2>
+	<h2>Responses ({{ responses|length }}):</h2>
 	{% if responses|length == 0 %}
 		You haven't receieved any responses yet.
 	{% else %}
@@ -35,6 +35,13 @@
 			</tbody>
 		</table>
 	{% endif %}
+
+	<h2>Edit Profile:</h2>
+	<form id="user-form" method="POST" action="">
+		{% csrf_token %}
+		{{ user_form.as_p }}
+		<input class="button" type="submit" value="Update"/>
+	</form>
 
 	<div class="interview-links">
 		<p>Public (share with others): <a href="/{{ interview.interviewer.username }}/">http://{{ host }}/{{ interview.interviewer.username }}/</a></p>

@@ -295,6 +295,17 @@ form ul.errorlist li {
   color: #FFF;
   text-decoration: none;
 }
+.content-interview-private form#user-form {
+  margin-bottom: 20px;
+}
+.content-interview-private form#user-form label {
+  display: inline-block;
+  width: 150px;
+  text-align: left;
+}
+.content-interview-private form#user-form input {
+  display: inline-block;
+}
 /* Interview Respond */
 .content-interview-respond {
   text-align: center;

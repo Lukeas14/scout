@@ -20,6 +20,15 @@ class UserForm(forms.Form):
 
 		return self.user
 
+	def save_user(self, user):
+		user.username = self.unique_slugify(get_user_model(), self.cleaned_data['name'], 'username')
+		user.email = self.cleaned_data['email']
+		user.first_name = " ".join(self.cleaned_data['name'].split(' ')[:-1])
+		user.last_name = " ".join(self.cleaned_data['name'].split(' ')[-1:])
+		user.save()
+
+		return user
+
 	def unique_slugify(self, instance, value, slug_field_name='slug', queryset=None, slug_separator='-'):
 		"""
 		Calculates and stores a unique slug of ``value`` for an instance.
