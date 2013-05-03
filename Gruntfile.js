@@ -1,7 +1,7 @@
 module.exports = function(grunt){
 	var js_files = [
-    'static/js/jquery-1.9.1.js',
-		'static/js/scout.js'
+    'static/dev/js/jquery-1.9.1.js',
+		'static/dev/js/scout.js'
 	];
 	
 	// Project configuration.
@@ -10,25 +10,25 @@ module.exports = function(grunt){
     concat: {
       dist: {
         src: js_files,
-        dest: 'static/js/script.js'
+        dest: 'static/dev/js/script.js'
       }
     },
     uglify: {
       build: {
-        src: 'static/js/script.js',
-        dest: 'static/js/min/script.min.js'
+        src: 'static/dev/js/script.js',
+        dest: 'static/dev/js/min/script.min.js'
       }
     },
     less: {
       all: {
         files: {
-          'static/css/style.css': 'static/css/less/scout.less'
+          'static/dev/css/style.css': 'static/dev/css/less/scout.less'
         }
       }
     },
     watch: {
       scrips: {
-        files: js_files.concat(['static/css/less/*.less']),
+        files: js_files.concat(['static/dev/css/less/*.less']),
         tasks: [ 'less', 'concat', 'uglify'],
         interrupt: true
       }
